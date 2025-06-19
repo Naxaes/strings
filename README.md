@@ -29,8 +29,8 @@ Converts a `German_String` to a `Str` view.
 To compile and run the test/bench suite:
 
 ```bash
-cc -DSTRINGS_TEST -o string_test string.c
-cc -o string_bench test.c
+cc -DSTRINGS_TEST -o string_test strings.c
+cc -o string_bench -O2 test.c
 ./string_test
 ./string_bench
 ```
