@@ -154,9 +154,14 @@ int main(void) {
     double* timings2 = malloc(TEST_CASES * sizeof(double));
     int timing_counter = 0;
 
+    int short_string_count = 0;
+
     for (int i = 0; i < TEST_CASES; ++i) {
-        int len_a = biased_random(MAX_STRING_LENGTH, 2.0);
-        int len_b = biased_random(MAX_STRING_LENGTH, 2.0);
+        int len_a = biased_random(MAX_STRING_LENGTH, 1.25);
+        int len_b = biased_random(MAX_STRING_LENGTH, 1.25);
+
+        if (len_a <= SHORT_STRING_CAPACITY) short_string_count += 1;
+        if (len_b <= SHORT_STRING_CAPACITY) short_string_count += 1;
 
         char buf_a[MAX_STRING_LENGTH + 1] = {0};
         char buf_b[MAX_STRING_LENGTH + 1] = {0};
@@ -186,6 +191,8 @@ int main(void) {
 
         timing_counter += 1;
     }
+
+    printf("Total strings: %d | Short strings: %d | Ratio: %f\n", 2*timing_counter, short_string_count, (float)short_string_count / (2.0f*(float)timing_counter));
 
     printf("\n---- German string ----\n");
     report_timing(timings1);
